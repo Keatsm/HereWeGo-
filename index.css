@@ -1,0 +1,27 @@
+body{
+    background-color: #202124;
+    text-align: center;
+}
+
+#heading{
+    color: lightgrey;
+    font-family: 'Nunito', sans-serif;
+    font-size: 30px;
+    margin: auto;    
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+}
+
+#search{
+    color: black;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    margin: auto;    
+    font-weight: bold;
+    margin: auto;
+    width: 20%;
+    padding: 15px;
+    border: 3px solid;
+    border-radius: 40px;
+}
