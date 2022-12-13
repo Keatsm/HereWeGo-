@@ -12,5 +12,35 @@
     <h1 id="heading">Here We Go!</h1>
     <br>
     <input type="text" id="search" name="search" placeholder="Search for a Team/Player">
+    <script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+      
+        return t;
+      }(document, "script", "twitter-wjs"));</script>
+      <button onclick="func()">Search</button>
+      <script>
+        const func = () => {
+            console.log(document.getElementsByTagName("input")[0].value);
+            fetch(`http://127.0.0.1:1000/tweets?searchTerm=${document.getElementsByTagName("input")[0].value}`, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                },
+            })
+            .then(response => response.text())
+            .then(text => console.log(text))
+          }
+      </script>
 </body>
 </html>

@@ -1,5 +1,23 @@
 {
   "dependencies": {
-    "twitter": "^1.7.1"
-  }
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "got": "^12.5.1",
+    "middleware-http-errors": "^0.1.1",
+    "morgan": "^1.10.0",
+    "needle": "^3.1.0",
+    "oauth-1.0a": "^2.2.6",
+    "twit": "^2.2.11",
+    "twitter": "^1.7.1",
+    "twitter-api-sdk": "^1.2.1",
+    "twitter-api-v2": "^1.12.9",
+    "watchify": "^4.0.0"
+  },
+  "scripts": {
+    "build": "browserify main.js -o index.js"
+  },
+  "type": "module"
 }
