@@ -29,17 +29,29 @@
         return t;
       }(document, "script", "twitter-wjs"));</script>
       <button onclick="func()">Search</button>
+      <div id="tweet-container"></div>
       <script>
-        const func = () => {
+        const func = async () => {
+            let URLs = [];
             console.log(document.getElementsByTagName("input")[0].value);
-            fetch(`http://127.0.0.1:1000/tweets?searchTerm=${document.getElementsByTagName("input")[0].value}`, {
+            await fetch(`http://127.0.0.1:1000/tweets?searchTerm=${document.getElementsByTagName("input")[0].value}`, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                 },
             })
             .then(response => response.text())
-            .then(text => console.log(text))
+            .then(text => {
+                URLs = text.split(",");
+            })
+            URLs.forEach( async (url) => {
+                url = url.replace(/^\D+|\D+$/g, "")
+                console.log(url);
+                await twttr.widgets.createTweet(url, document.getElementById("tweet-container"), {
+                  theme: "dark",
+                  align: "center"
+                });
+            });
           }
       </script>
 </body>
