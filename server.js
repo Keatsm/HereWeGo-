@@ -37,14 +37,18 @@ app.get('/tweets', async (req, res) => {
   const search = searchTerm.split(" ");
   let tweetURLs = [];
   const timeLine = await readOnlyClient.v2.userTimeline(AUTHOR_ID, { exclude: 'replies' });
-  await timeLine.fetchLast(200);
+  await timeLine.fetchLast(500);
   for (const tweet of timeLine.tweets) {
+    let hasTerms = true;
     for (const word of search) {
-      if (tweet.text.toLowerCase().includes(word.toLowerCase())) {
-        console.log(tweet.text);
-        tweetURLs.push(tweet.id);
+      if (!tweet.text.toLowerCase().includes(word.toLowerCase())) {
+        hasTerms = false;
         break;
       }
+    }
+    if (hasTerms) {
+      console.log(tweet.text);
+      tweetURLs.push(tweet.id);
     }
   }
     res.json(tweetURLs);
