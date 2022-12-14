@@ -32,7 +32,9 @@
       <div id="tweet-container"></div>
       <script>
         const func = async () => {
-            let URLs = [];
+          const container = document.getElementById('tweet-container');
+          container.innerHTML = '';  
+          let URLs = [];
             console.log(document.getElementsByTagName("input")[0].value);
             await fetch(`http://127.0.0.1:1000/tweets?searchTerm=${document.getElementsByTagName("input")[0].value}`, {
                 method: 'GET',
@@ -44,14 +46,20 @@
             .then(text => {
                 URLs = text.split(",");
             })
-            URLs.forEach( async (url) => {
+            console.log(URLs.length);
+            if (URLs[0].replace(/^\D+|\D+$/g, "").length == 0) {
+              container.innerHTML +=
+              "<h3>No results found.</h3>"
+            } else {
+              URLs.forEach( async (url) => {
                 url = url.replace(/^\D+|\D+$/g, "")
-                console.log(url);
+                console.log(url.length);
                 await twttr.widgets.createTweet(url, document.getElementById("tweet-container"), {
                   theme: "dark",
                   align: "center"
                 });
             });
+            }
           }
       </script>
 </body>
