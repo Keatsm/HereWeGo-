@@ -47,7 +47,7 @@
                 URLs = text.split(",");
             })
             console.log(URLs.length);
-            if (URLs[0].replace(/^\D+|\D+$/g, "").length == 0) {
+            if (URLs[0].replace(/^\D+|\D+$/g, "").length === 0) {
               container.innerHTML +=
               "<h3>No results found.</h3>"
             } else {
