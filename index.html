@@ -33,7 +33,8 @@
       <script>
         const func = async () => {
           const container = document.getElementById('tweet-container');
-          container.innerHTML = '';  
+          container.innerHTML = '';
+          container.innerHTML += `<br><div class="loader"></div>`  
           let URLs = [];
             console.log(document.getElementsByTagName("input")[0].value);
             await fetch(`http://127.0.0.1:1000/tweets?searchTerm=${document.getElementsByTagName("input")[0].value}`, {
@@ -46,14 +47,14 @@
             .then(text => {
                 URLs = text.split(",");
             })
-            console.log(URLs.length);
+            console.log("Tweet Number: " + URLs.length);
+            container.innerHTML = '';
             if (URLs[0].replace(/^\D+|\D+$/g, "").length === 0) {
               container.innerHTML +=
               "<h3>No results found.</h3>"
             } else {
               URLs.forEach( async (url) => {
                 url = url.replace(/^\D+|\D+$/g, "")
-                console.log(url.length);
                 await twttr.widgets.createTweet(url, document.getElementById("tweet-container"), {
                   theme: "dark",
                   align: "center"
